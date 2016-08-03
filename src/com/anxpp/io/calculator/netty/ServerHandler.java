@@ -6,7 +6,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
+
+import com.anxpp.io.utils.Calculator;
 
 /**
  * Handles a server-side channel.
@@ -24,7 +25,13 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 		in.readBytes(req);
 		String body = new String(req,"utf-8");
 		System.out.println("收到客户端消息:"+body);
-		ctx.write(Unpooled.copiedBuffer(new Date().toString().getBytes()));
+		String calrResult = null;
+		try{
+			calrResult = Calculator.Instance.cal(body).toString();
+		}catch(Exception e){
+			calrResult = "错误的表达式：" + e.getMessage();
+		}
+		ctx.write(Unpooled.copiedBuffer(calrResult.getBytes()));
 	}
 
 	@Override
