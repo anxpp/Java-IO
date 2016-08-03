@@ -6,51 +6,51 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import com.anxpp.io.utils.Calculator;
 public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
-	//ÓÃÓÚ¶ÁÈ¡°ë°üÏûÏ¢ºÍ·¢ËÍÓ¦´ð
+	//ï¿½ï¿½ï¿½Ú¶ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Í·ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½
 	private AsynchronousSocketChannel channel;
 	public ReadHandler(AsynchronousSocketChannel channel) {
 			this.channel = channel;
 	}
-	//¶ÁÈ¡µ½ÏûÏ¢ºóµÄ´¦Àí
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
 	@Override
 	public void completed(Integer result, ByteBuffer attachment) {
-		//flip²Ù×÷
+		//flipï¿½ï¿½ï¿½ï¿½
 		attachment.flip();
-		//¸ù¾Ý
+		//ï¿½ï¿½ï¿½ï¿½
 		byte[] message = new byte[attachment.remaining()];
 		attachment.get(message);
 		try {
 			String expression = new String(message, "UTF-8");
-			System.out.println("·þÎñÆ÷ÊÕµ½ÏûÏ¢: " + expression);
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ï¢: " + expression);
 			String calrResult = null;
 			try{
-				calrResult = Calculator.cal(expression).toString();
+				calrResult = Calculator.Instance.cal(expression).toString();
 			}catch(Exception e){
-				calrResult = "¼ÆËã´íÎó£º" + e.getMessage();
+				calrResult = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + e.getMessage();
 			}
-			//Ïò¿Í»§¶Ë·¢ËÍÏûÏ¢
+			//ï¿½ï¿½Í»ï¿½ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 			doWrite(calrResult);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 	}
-	//·¢ËÍÏûÏ¢
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	private void doWrite(String result) {
 		byte[] bytes = result.getBytes();
 		ByteBuffer writeBuffer = ByteBuffer.allocate(bytes.length);
 		writeBuffer.put(bytes);
 		writeBuffer.flip();
-		//Òì²½Ð´Êý¾Ý ²ÎÊýÓëÇ°ÃæµÄreadÒ»Ñù
+		//ï¿½ì²½Ð´ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½readÒ»ï¿½ï¿½
 		channel.write(writeBuffer, writeBuffer,new CompletionHandler<Integer, ByteBuffer>() {
 			@Override
 			public void completed(Integer result, ByteBuffer buffer) {
-				//Èç¹ûÃ»ÓÐ·¢ËÍÍê£¬¾Í¼ÌÐø·¢ËÍÖ±µ½Íê³É
+				//ï¿½ï¿½ï¿½Ã»ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ê£¬ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½
 				if (buffer.hasRemaining())
 					channel.write(buffer, buffer, this);
 				else{
-					//´´½¨ÐÂµÄBuffer
+					//ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Buffer
 					ByteBuffer readBuffer = ByteBuffer.allocate(1024);
-					//Òì²½¶Á  µÚÈý¸ö²ÎÊýÎª½ÓÊÕÏûÏ¢»Øµ÷µÄÒµÎñHandler
+					//ï¿½ì²½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Øµï¿½ï¿½ï¿½Òµï¿½ï¿½Handler
 					channel.read(readBuffer, readBuffer, new ReadHandler(channel));
 				}
 			}

@@ -7,9 +7,9 @@ import java.net.Socket;
 
 import com.anxpp.io.utils.Calculator;
 /**
- * ¿Í»§¶ËÏß³Ì
+ * ï¿½Í»ï¿½ï¿½ï¿½ï¿½ß³ï¿½
  * @author yangtao__anxpp.com
- * ÓÃÓÚ´¦ÀíÒ»¸ö¿Í»§¶ËµÄSocketÁ´Â·
+ * ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Í»ï¿½ï¿½Ëµï¿½Socketï¿½ï¿½Â·
  */
 public class ServerHandler implements Runnable{
 	private Socket socket;
@@ -26,22 +26,22 @@ public class ServerHandler implements Runnable{
 			String expression;
 			String result;
 			while(true){
-				//Í¨¹ýBufferedReader¶ÁÈ¡Ò»ÐÐ
-				//Èç¹ûÒÑ¾­¶Áµ½ÊäÈëÁ÷Î²²¿£¬·µ»Ønull,ÍË³öÑ­»·
-				//Èç¹ûµÃµ½·Ç¿ÕÖµ£¬¾Í³¢ÊÔ¼ÆËã½á¹û²¢·µ»Ø
+				//Í¨ï¿½ï¿½BufferedReaderï¿½ï¿½È¡Ò»ï¿½ï¿½
+				//ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½null,ï¿½Ë³ï¿½Ñ­ï¿½ï¿½
+				//ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½Ç¿ï¿½Öµï¿½ï¿½ï¿½Í³ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if((expression = in.readLine())==null) break;
-				System.out.println("·þÎñÆ÷ÊÕµ½ÏûÏ¢£º" + expression);
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½" + expression);
 				try{
-					result = Calculator.cal(expression).toString();
+					result = Calculator.Instance.cal(expression).toString();
 				}catch(Exception e){
-					result = "¼ÆËã´íÎó£º" + e.getMessage();
+					result = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + e.getMessage();
 				}
 				out.println(result);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			//Ò»Ð©±ØÒªµÄÇåÀí¹¤×÷
+			//Ò»Ð©ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(in != null){
 				try {
 					in.close();

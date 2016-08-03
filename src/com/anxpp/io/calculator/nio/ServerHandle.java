@@ -11,7 +11,7 @@ import java.util.Set;
 
 import com.anxpp.io.utils.Calculator;
 /**
- * NIO·þÎñ¶Ë
+ * NIOï¿½ï¿½ï¿½ï¿½ï¿½
  * @author yangtao__anxpp.com
  * @version 1.0
  */
@@ -20,24 +20,24 @@ public class ServerHandle implements Runnable{
 	private ServerSocketChannel serverChannel;
 	private volatile boolean started;
 	/**
-	 * ¹¹Ôì·½·¨
-	 * @param port Ö¸¶¨Òª¼àÌýµÄ¶Ë¿ÚºÅ
+	 * ï¿½ï¿½ï¿½ì·½ï¿½ï¿½
+	 * @param port Ö¸ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½Ä¶Ë¿Úºï¿½
 	 */
 	public ServerHandle(int port) {
 		try{
-			//´´½¨Ñ¡ÔñÆ÷
+			//ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½
 			selector = Selector.open();
-			//´ò¿ª¼àÌýÍ¨µÀ
+			//ï¿½ò¿ª¼ï¿½ï¿½ï¿½Í¨ï¿½ï¿½
 			serverChannel = ServerSocketChannel.open();
-			//Èç¹ûÎª true£¬Ôò´ËÍ¨µÀ½«±»ÖÃÓÚ×èÈûÄ£Ê½£»Èç¹ûÎª false£¬Ôò´ËÍ¨µÀ½«±»ÖÃÓÚ·Ç×èÈûÄ£Ê½
-			serverChannel.configureBlocking(false);//¿ªÆô·Ç×èÈûÄ£Ê½
-			//°ó¶¨¶Ë¿Ú backlogÉèÎª1024
+			//ï¿½ï¿½ï¿½Îª trueï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Îª falseï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
+			serverChannel.configureBlocking(false);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
+			//ï¿½ó¶¨¶Ë¿ï¿½ backlogï¿½ï¿½Îª1024
 			serverChannel.socket().bind(new InetSocketAddress(port),1024);
-			//¼àÌý¿Í»§¶ËÁ¬½ÓÇëÇó
+			//ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			serverChannel.register(selector, SelectionKey.OP_ACCEPT);
-			//±ê¼Ç·þÎñÆ÷ÒÑ¿ªÆô
+			//ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¿ï¿½ï¿½ï¿½
 			started = true;
-			System.out.println("·þÎñÆ÷ÒÑÆô¶¯£¬¶Ë¿ÚºÅ£º" + port);
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ÚºÅ£ï¿½" + port);
 		}catch(IOException e){
 			e.printStackTrace();
 			System.exit(1);
@@ -48,12 +48,12 @@ public class ServerHandle implements Runnable{
 	}
 	@Override
 	public void run() {
-		//Ñ­»·±éÀúselector
+		//Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½selector
 		while(started){
 			try{
-				//ÎÞÂÛÊÇ·ñÓÐ¶ÁÐ´ÊÂ¼þ·¢Éú£¬selectorÃ¿¸ô1s±»»½ÐÑÒ»´Î
+				//ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ð¶ï¿½Ð´ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½selectorÃ¿ï¿½ï¿½1sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 				selector.select(1000);
-				//×èÈû,Ö»ÓÐµ±ÖÁÉÙÒ»¸ö×¢²áµÄÊÂ¼þ·¢ÉúµÄÊ±ºò²Å»á¼ÌÐø.
+				//ï¿½ï¿½ï¿½ï¿½,Ö»ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½.
 //				selector.select();
 				Set<SelectionKey> keys = selector.selectedKeys();
 				Iterator<SelectionKey> it = keys.iterator();
@@ -76,7 +76,7 @@ public class ServerHandle implements Runnable{
 				t.printStackTrace();
 			}
 		}
-		//selector¹Ø±Õºó»á×Ô¶¯ÊÍ·ÅÀïÃæ¹ÜÀíµÄ×ÊÔ´
+		//selectorï¿½Ø±Õºï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
 		if(selector != null)
 			try{
 				selector.close();
@@ -86,47 +86,47 @@ public class ServerHandle implements Runnable{
 	}
 	private void handleInput(SelectionKey key) throws IOException{
 		if(key.isValid()){
-			//´¦ÀíÐÂ½ÓÈëµÄÇëÇóÏûÏ¢
+			//ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 			if(key.isAcceptable()){
 				ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
-				//Í¨¹ýServerSocketChannelµÄaccept´´½¨SocketChannelÊµÀý
-				//Íê³É¸Ã²Ù×÷ÒâÎ¶×ÅÍê³ÉTCPÈý´ÎÎÕÊÖ£¬TCPÎïÀíÁ´Â·ÕýÊ½½¨Á¢
+				//Í¨ï¿½ï¿½ServerSocketChannelï¿½ï¿½acceptï¿½ï¿½ï¿½ï¿½SocketChannelÊµï¿½ï¿½
+				//ï¿½ï¿½É¸Ã²ï¿½ï¿½ï¿½ï¿½ï¿½Î¶ï¿½ï¿½ï¿½ï¿½ï¿½TCPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½TCPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½
 				SocketChannel sc = ssc.accept();
-				//ÉèÖÃÎª·Ç×èÈûµÄ
+				//ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				sc.configureBlocking(false);
-				//×¢²áÎª¶Á
+				//×¢ï¿½ï¿½Îªï¿½ï¿½
 				sc.register(selector, SelectionKey.OP_READ);
 			}
-			//¶ÁÏûÏ¢
+			//ï¿½ï¿½ï¿½ï¿½Ï¢
 			if(key.isReadable()){
 				SocketChannel sc = (SocketChannel) key.channel();
-				//´´½¨ByteBuffer£¬²¢¿ª±ÙÒ»¸ö1MµÄ»º³åÇø
+				//ï¿½ï¿½ï¿½ï¿½ByteBufferï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½1Mï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½
 				ByteBuffer buffer = ByteBuffer.allocate(1024);
-				//¶ÁÈ¡ÇëÇóÂëÁ÷£¬·µ»Ø¶ÁÈ¡µ½µÄ×Ö½ÚÊý
+				//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½
 				int readBytes = sc.read(buffer);
-				//¶ÁÈ¡µ½×Ö½Ú£¬¶Ô×Ö½Ú½øÐÐ±à½âÂë
+				//ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½Ö½Ú½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½
 				if(readBytes>0){
-					//½«»º³åÇøµ±Ç°µÄlimitÉèÖÃÎªposition=0£¬ÓÃÓÚºóÐø¶Ô»º³åÇøµÄ¶ÁÈ¡²Ù×÷
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½limitï¿½ï¿½ï¿½ï¿½Îªposition=0ï¿½ï¿½ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 					buffer.flip();
-					//¸ù¾Ý»º³åÇø¿É¶Á×Ö½ÚÊý´´½¨×Ö½ÚÊý×é
+					//ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½
 					byte[] bytes = new byte[buffer.remaining()];
-					//½«»º³åÇø¿É¶Á×Ö½ÚÊý×é¸´ÖÆµ½ÐÂ½¨µÄÊý×éÖÐ
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½é¸´ï¿½Æµï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					buffer.get(bytes);
 					String expression = new String(bytes,"UTF-8");
-					System.out.println("·þÎñÆ÷ÊÕµ½ÏûÏ¢£º" + expression);
-					//´¦ÀíÊý¾Ý
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½" + expression);
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					String result = null;
 					try{
-						result = Calculator.cal(expression).toString();
+						result = Calculator.Instance.cal(expression).toString();
 					}catch(Exception e){
-						result = "¼ÆËã´íÎó£º" + e.getMessage();
+						result = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + e.getMessage();
 					}
-					//·¢ËÍÓ¦´ðÏûÏ¢
+					//ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ï¢
 					doWrite(sc,result);
 				}
-				//Ã»ÓÐ¶ÁÈ¡µ½×Ö½Ú ºöÂÔ
+				//Ã»ï¿½Ð¶ï¿½È¡ï¿½ï¿½ï¿½Ö½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //				else if(readBytes==0);
-				//Á´Â·ÒÑ¾­¹Ø±Õ£¬ÊÍ·Å×ÊÔ´
+				//ï¿½ï¿½Â·ï¿½Ñ¾ï¿½ï¿½Ø±Õ£ï¿½ï¿½Í·ï¿½ï¿½ï¿½Ô´
 				else if(readBytes<0){
 					key.cancel();
 					sc.close();
@@ -134,18 +134,18 @@ public class ServerHandle implements Runnable{
 			}
 		}
 	}
-	//Òì²½·¢ËÍÓ¦´ðÏûÏ¢
+	//ï¿½ì²½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ï¢
 	private void doWrite(SocketChannel channel,String response) throws IOException{
-		//½«ÏûÏ¢±àÂëÎª×Ö½ÚÊý×é
+		//ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½Îªï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½
 		byte[] bytes = response.getBytes();
-		//¸ù¾ÝÊý×éÈÝÁ¿´´½¨ByteBuffer
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ByteBuffer
 		ByteBuffer writeBuffer = ByteBuffer.allocate(bytes.length);
-		//½«×Ö½ÚÊý×é¸´ÖÆµ½»º³åÇø
+		//ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½é¸´ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		writeBuffer.put(bytes);
-		//flip²Ù×÷
+		//flipï¿½ï¿½ï¿½ï¿½
 		writeBuffer.flip();
-		//·¢ËÍ»º³åÇøµÄ×Ö½ÚÊý×é
+		//ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½
 		channel.write(writeBuffer);
-		//****´Ë´¦²»º¬´¦Àí¡°Ð´°ë°ü¡±µÄ´úÂë
+		//****ï¿½Ë´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
 	}
 }
